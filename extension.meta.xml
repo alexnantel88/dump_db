@@ -15,6 +15,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="2.0.0" date="TBA" min="4.0.0" max="4.x.x">
+			- Update for Symphony 4.x
+		</release>
 		<release version="1.12" date="2015-01-16" min="2.4">
 			- Symphony 2.5 compatibility
 		</release>
@@ -29,7 +32,7 @@
 		<release version="1.11" date="2014-06-22" min="2.4">
 			- Symphony 2.4 compatibility
 		</release>
-		<release version="1.10" date="2012-06-30" min="2.3" max="2.3">
+		<release version="1.10" date="2012-06-30" min="2.3">
 			- Symphony 2.3 compatibility
 		</release>
 		<release version="1.09" date="2011-12-13" min="2.2">
