@@ -92,11 +92,11 @@
 			$group->appendChild(new XMLElement('legend', __('Dump Database')));
 
 
-			$div = new XMLElement('div', NULL, array('id' => 'dump-actions', 'class' => 'label'));
+			$div = new XMLElement('div', null, array('id' => 'dump-actions', 'class' => 'label'));
 
 			$disabled = (count($filesWriteable) < 2 && !$downloadMode ? array('disabled' => 'disabled') : array());
 
-			$span = new XMLElement('span', NULL, array('class' => 'frame'));
+			$span = new XMLElement('span', null, array('class' => 'frame'));
 			$span->appendChild(new XMLElement('button', __('Save Authors'), array_merge(array('name' => 'action[dump][authors]', 'type' => 'submit'), $disabled)));
 			$span->appendChild(new XMLElement('button', __('Save Data'), array_merge(array('name' => 'action[dump][data]', 'type' => 'submit'), $disabled)));
 			$div->appendChild($span);
@@ -107,7 +107,7 @@
 
 			$disabled = (Symphony::Configuration()->get('restore', 'dump_db') === 'yes' ? array() : array('disabled' => 'disabled'));
 
-			$span = new XMLElement('span', NULL, array('class' => 'frame'));
+			$span = new XMLElement('span', null, array('class' => 'frame'));
 			$span->appendChild(new XMLElement('button', __('Restore Authors'), array_merge(array('name' => 'action[restore][authors]', 'type' => 'submit'), $disabled)));
 			$span->appendChild(new XMLElement('button', __('Restore Data'), array_merge(array('name' => 'action[restore][data]', 'type' => 'submit'), $disabled)));
 			$div->appendChild($span);
@@ -133,7 +133,7 @@
 			}
 
 			if($return == array())
-				$return = NULL;
+				$return = null;
 
 			return $return;
 		}
@@ -147,8 +147,8 @@
 
 			$last_sync = strtotime(Symphony::Configuration()->get('last_sync', 'dump_db'));
 
-			if($last_sync === FALSE)
-				return FALSE;
+			if($last_sync === false)
+				return false;
 
 			foreach(array("data", "authors") AS $mode) {
 				$filename = DOCROOT . $this->path . '/' . $this->generateFilename($mode);
@@ -159,7 +159,7 @@
 			}
 
 			if($return == array())
-				$return = NULL;
+				$return = null;
 
 			return $return;
 		}
@@ -172,15 +172,15 @@
 
 			$restore = new MySQLRestore(Symphony::Database());
 
-			$mode = NULL;
+			$mode = null;
 			$mode = (isset($_POST['action']['restore']['authors']))? 'authors' : 'data';
-			if($mode == NULL) return;
+			if($mode == null) return;
 
 			$filename = $this->generateFilename($mode);
 
 			$return = $restore->import(file_get_contents(DOCROOT . $this->path . '/' . $filename));
 
-			if(FALSE !== $return) {
+			if(false !== $return) {
 				Administration::instance()->Page->pageAlert(__('%s successfully restored from <code>%s/%s</code> in %d queries.',array(__(ucfirst($mode)),$this->path,$filename,$return)), Alert::SUCCESS);
 				Symphony::Configuration()->set('last_sync', date('c') ,'dump_db');
 				Symphony::Configuration()->write();
@@ -191,7 +191,7 @@
 		}
 
 		private function __dump($context){
-			$sql_schema = $sql_data = NULL;
+			$sql_schema = $sql_data = null;
 
 			require_once(dirname(__FILE__) . '/lib/class.mysqldump.php');
 
@@ -201,9 +201,9 @@
 			$rows = array_map (create_function ('$x', 'return array_values ($x);'), $rows);
 			$tables = array_map (create_function ('$x', 'return $x[0];'), $rows);
 
-			$mode = NULL;
+			$mode = null;
 			$mode = (isset($_POST['action']['dump']['authors']))? 'authors' : 'data';
-			if($mode == NULL) return;
+			if($mode == null) return;
 
 			$filename = $this->generateFilename($mode);
 
@@ -264,7 +264,7 @@
 				die();
 			}
 			else {
-				if(FALSE !== @file_put_contents(DOCROOT . $this->path . '/' . $filename, $sql_data)) {
+				if(false !== @file_put_contents(DOCROOT . $this->path . '/' . $filename, $sql_data)) {
 					Administration::instance()->Page->pageAlert(__('%s successfully dumped into <code>%s/%s</code>.',array(__(ucfirst($mode)),$this->path,$filename)), Alert::SUCCESS);
 					Symphony::Configuration()->set('last_sync', date('c') ,'dump_db');
 					Symphony::Configuration()->write();
